@@ -4,6 +4,8 @@ This example demonstrates using a custom flow definition
 on Gladier Tools. Gladier will detect any changes to the final
 flow definition and re-deploy it as needed.
 
+See documentatin on writing [Custom Flows in Gladier here](https://gladier.readthedocs.io/en/latest/gladier/flow_generation.html).
+
 ### Requirements
 
 * A Python Environment with Gladier installed

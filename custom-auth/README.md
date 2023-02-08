@@ -5,6 +5,10 @@ of Glaider handling auth flows internally, Auth will be fully
 controlled by the custom external application. Gladier will
 raise events when it requires a login for a new scope.
 
+See the docs for more information about Auth in Gladier:
+
+https://gladier.readthedocs.io/en/latest/gladier/custom_auth.html
+
 ### Requirements
 
 * A Python Environment with Gladier installed

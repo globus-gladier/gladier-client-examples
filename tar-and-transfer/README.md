@@ -11,7 +11,7 @@ a tool multiple times in a flow.
 ### Requirements
 
 **WARNING** This example requires a FuncX Endpoint with connected Globus Storage! You will
-not be able to complete this example without it!
+not be able to complete this example without both of these things setup! See **[Setup Docs](https://gladier.readthedocs.io/en/latest/gladier/setup.html)**.
 
 * A Python Environment with Gladier installed
 * A FuncX Endpoint with Globus accessible storage
