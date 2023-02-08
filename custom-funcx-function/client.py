@@ -13,19 +13,18 @@ class ComputeSum(GladierBaseTool):
 
     a: (optional, defaults to 2): first integer to add
     b: second integer to add
-    funcx_endpoint_compute: Funcx endpoint used to compute these values 
+    funcx_endpoint_compute: Funcx endpoint used to compute these values
     returns: the computed result
     """
+
     funcx_functions = [compute_sum]
     required_input = [
-        'a',
-        'b',
-        'funcx_endpoint_compute',
+        "a",
+        "b",
+        "funcx_endpoint_compute",
     ]
     # By default, a will have a value of '2' if not specified as input
-    flow_input = {
-        'a': 2
-    }
+    flow_input = {"a": 2}
 
 
 @generate_flow_definition
@@ -35,12 +34,12 @@ class ComputeSumClient(GladierBaseClient):
     ]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     flow_input = {
-        'input': {
+        "input": {
             # 'a': 3,
             # 'b': 2,
-            'funcx_endpoint_compute': '4b116d3c-1703-4f8f-9f6f-39921e5864df',
+            "funcx_endpoint_compute": "4b116d3c-1703-4f8f-9f6f-39921e5864df",
         }
     }
     # Instantiate the client
@@ -50,9 +49,9 @@ if __name__ == '__main__':
     pprint(shell_cmd_client.flow_definition)
 
     # Run the flow
-    flow = shell_cmd_client.run_flow(flow_input=flow_input, label='Shell CMD Example')
+    flow = shell_cmd_client.run_flow(flow_input=flow_input, label="Shell CMD Example")
 
     # Track the progress
-    run_id = flow['run_id']
+    run_id = flow["run_id"]
     shell_cmd_client.progress(run_id)
     pprint(shell_cmd_client.get_status(run_id))
