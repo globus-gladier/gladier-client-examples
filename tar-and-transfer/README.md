@@ -5,6 +5,9 @@ then transfer the result to another location. This approach uses existing tools
 in the [Gladier Tools](https://gladier.readthedocs.io/en/latest/gladier_tools/index.html)
 repository.
 
+The two transfer tools in this flow use _aliases_, which is a Gladier feature for re-using
+a tool multiple times in a flow.
+
 ### Requirements
 
 **WARNING** This example requires a FuncX Endpoint with connected Globus Storage! You will
