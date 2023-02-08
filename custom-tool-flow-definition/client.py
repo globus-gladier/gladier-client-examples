@@ -29,12 +29,12 @@ class HelloClient(GladierBaseClient):
 
 
 if __name__ == "__main__":
-    flow_input = {"input": {"echo_string": "Hello World!"}}
     # Instantiate the client
     hello_client = HelloClient()
 
     # Run the flow
-    flow = hello_client.run_flow(flow_input=flow_input, label="Shell CMD Example")
+    flow_input = {"input": {"echo_string": "Hello World!"}}
+    flow = hello_client.run_flow(flow_input=flow_input, label="Hello World Example")
 
     # Track the progress
     run_id = flow["run_id"]

@@ -48,7 +48,8 @@ run = client.run_flow(
             "capture_output": True,
             "funcx_endpoint_compute": "4b116d3c-1703-4f8f-9f6f-39921e5864df",
         }
-    }
+    },
+    label="Custom Auth Example",
 )
 
 run_id = run["run_id"]

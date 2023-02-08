@@ -49,7 +49,9 @@ if __name__ == "__main__":
     pprint(shell_cmd_client.flow_definition)
 
     # Run the flow
-    flow = shell_cmd_client.run_flow(flow_input=flow_input, label="Shell CMD Example")
+    flow = shell_cmd_client.run_flow(
+        flow_input=flow_input, label="Custom FuncX Func Example"
+    )
 
     # Track the progress
     run_id = flow["run_id"]
