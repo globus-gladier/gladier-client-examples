@@ -1,8 +1,8 @@
-## Shell CMD
+## Custom FuncX Function
 
-Run a shell command on a remote FuncX Endpoint. More info at the 
-[Gladier Tools](https://gladier.readthedocs.io/en/latest/gladier_tools/index.html)
-repository.
+This module defines a custom FuncX Function to use as part of the flow.
+The function can be freely modified between flows, and Glaider will
+re-register the function if it detects changes.
 
 ### Requirements
 
