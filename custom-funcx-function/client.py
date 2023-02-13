@@ -1,3 +1,7 @@
+"""
+Make sure you are part of the Globus Flows Users group so that you can deploy this flow,
+or delete any prior flows before running this example.
+"""
 from gladier import GladierBaseClient, GladierBaseTool, generate_flow_definition
 from pprint import pprint
 
