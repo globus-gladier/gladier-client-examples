@@ -1,3 +1,7 @@
+"""
+Make sure you are part of the Globus Flows Users group so that you can deploy this flow,
+or delete any prior flows before running this example.
+"""
 from typing import List, Mapping, Union
 from globus_sdk import AccessTokenAuthorizer, RefreshTokenAuthorizer
 from fair_research_login import NativeClient, LoadError
