@@ -7,9 +7,16 @@ from pprint import pprint
 
 
 def gather_metadata(publishv2, **data) -> dict:
+    """
+    This step is a custom funcx function to represent collecting
+    metadata from 'custom datasets'. In this case, we also create the 'dataset' from
+    scratch.
+    """
     import pathlib
     import random
 
+    # Create the dataset files used for publication. Also create some interesting
+    # unique fields to track within Globus Search.
     dataset = pathlib.PosixPath(publishv2['dataset'])
     dataset.mkdir(exist_ok=True)
     num_hellos, num_worlds = random.randint(1, 100), random.randint(1, 100)
@@ -18,6 +25,8 @@ def gather_metadata(publishv2, **data) -> dict:
     bar = dataset / 'bar.txt'
     bar.write_text('World!' * num_worlds)
 
+    # List the unique 'num_hellos' and 'num_worlds' items within metadata, so it
+    # can be catalogued within Globus Search.
     extra_metadata = {
         'project_metadata': {
             'number_of_hellos': num_hellos,
@@ -34,6 +43,7 @@ class GatherMetadata(GladierBaseTool):
     
 
 def cleanup_files(publishv2, **data) -> dict:
+    """Cleanup the files generated under gather_metadata"""
     import pathlib
     dataset = pathlib.PosixPath(publishv2['dataset'])
     (dataset / 'foo.txt').unlink()
@@ -48,8 +58,12 @@ class CleanupFiles(GladierBaseTool):
 
 
 @generate_flow_definition(modifiers={
+    # publishv2_gather_metadata uses funcx_endpoint_non_compute, so our other custom functions
+    # will also use this endpoint.
     'gather_metadata': {'endpoint': 'funcx_endpoint_non_compute'},
     'cleanup_files': {'endpoint': 'funcx_endpoint_non_compute'},
+    # Make the Publishv2 Tool get its metadata from the result of the custom GatherMetadata
+    # function above.
     'publishv2_gather_metadata': {'payload': '$.GatherMetadata.details.result[0]'},
 })
 class PublicationTestClient(GladierBaseClient):
@@ -81,6 +95,7 @@ if __name__ == "__main__":
                 # Use this to validate the 'dc' or datacite field metadata schema
                 # Requires 'datacite' package
                 # 'metadata_dc_validation_schema': 'schema43',
+                # Custom metadata can be added here.
                 'metadata': {
                     'dc': {
                         'creators': [{'name': 'Lead Scientist'}],
@@ -89,6 +104,7 @@ if __name__ == "__main__":
                     }
                 }
             },
+            # FuncX Test endpoint
             'funcx_endpoint_non_compute': '4b116d3c-1703-4f8f-9f6f-39921e5864df',
         }
     }

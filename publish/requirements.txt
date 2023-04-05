@@ -1,0 +1,6 @@
+# Required
+gladier
+gladier-tools
+# Optional
+datacite
+puremagic
