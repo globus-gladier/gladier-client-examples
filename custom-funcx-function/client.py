@@ -4,11 +4,9 @@ or delete any prior flows before running this example.
 """
 from gladier import (
     GladierBaseClient,
-    GladierBaseTool,
     JSONObject,
-    generate_flow_definition,
 )
-from gladier.tools.globus import GlobusComputeStep
+from gladier.tools.globus import GlobusComputeStep, ComputeFunctionType
 from pprint import pprint
 import typing as t
 
@@ -18,14 +16,15 @@ def compute_sum(a: int, b: int, **data) -> int:
 
 
 class ComputeSumStep(GlobusComputeStep):
-    function_to_call: t.Union[t.Callable[[t.Any], t.Any], str] = compute_sum
+    function_to_call: ComputeFunctionType = compute_sum
     a: t.Union[
         str, int
     ] = 2  # By default, a will have a value of '2' if not specified as input
     b: t.Union[str, int] = "$.input.b"
 
     def get_flow_definition(self) -> JSONObject:
-        # The model parameters a and b will be passed as arguments to the function to invoke
+        # The model parameters a and b will be passed as arguments to the
+        # function to invoke
         self.set_call_params_from_self_model(["a", "b"])
         return super().get_flow_definition()
 

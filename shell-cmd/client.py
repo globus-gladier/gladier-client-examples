@@ -13,12 +13,13 @@ def main():
             "globus_compute_endpoint": "4b116d3c-1703-4f8f-9f6f-39921e5864df",
         }
     }
-    shell_cmd_client = ShellCmdStep(
-        cmd_args="cat /proc/version",
-        capture_output=True,
-    )
 
-    shell_cmd_client = GladierBaseClient(start_at=shell_cmd_client)
+    shell_cmd_client = GladierBaseClient(
+        start_at=ShellCmdStep(
+            cmd_args="cat /proc/version",
+            capture_output=True,
+        )
+    )
 
     # Optionally, print the flow definition
     pprint(shell_cmd_client.get_flow_definition())

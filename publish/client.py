@@ -3,6 +3,7 @@ Make sure you are part of the Globus Flows Users group so that you can deploy th
 or delete any prior flows before running this example.
 """
 from gladier import GladierBaseClient, GladierBaseTool, generate_flow_definition
+from gladier.tools.globus import GlobusComputeStep, ComputeFunctionType
 from pprint import pprint
 
 
@@ -37,6 +38,9 @@ def gather_metadata(publishv2, **data) -> dict:
     return publishv2
 
 
+class GatherMetadataStep(GlobusComputeStep):
+    function_to_call: ComputeFunctionType = gather_metadata
+    
 @generate_flow_definition
 class GatherMetadata(GladierBaseTool):
     funcx_functions = [gather_metadata]
@@ -51,6 +55,9 @@ def cleanup_files(publishv2, **data) -> dict:
     dataset.rmdir()
 
 
+class CleanupFilesStep(GlobusComputeStep):
+    function_to_call: ComputeFunctionType = cleanup_files
+    
 @generate_flow_definition
 class CleanupFiles(GladierBaseTool):
     funcx_functions = [cleanup_files]

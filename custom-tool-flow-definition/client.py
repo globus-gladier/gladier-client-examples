@@ -2,39 +2,21 @@
 Make sure you are part of the Globus Flows Users group so that you can deploy this flow,
 or delete any prior flows before running this example.
 """
-from gladier import GladierBaseClient, GladierBaseTool, generate_flow_definition
+import typing as t
 from pprint import pprint
 
-
-class HelloTool(GladierBaseTool):
-    flow_definition = {
-        "StartAt": "Hello",
-        "States": {
-            "Hello": {
-                "ActionUrl": "https://actions.globus.org/hello_world",
-                "Type": "Action",
-                "Parameters": {
-                    "echo_string.$": "$.input.echo_string",
-                    "sleep_time.$": "$.input.sleep_time",
-                },
-                "End": True,
-            }
-        },
-    }
-    required_input = ["echo_string", "sleep_time"]
-    flow_input = {
-        "sleep_time": 1,
-    }
+from gladier import ActionState, GladierBaseClient
 
 
-@generate_flow_definition
-class HelloClient(GladierBaseClient):
-    gladier_tools = [HelloTool]
+class HelloState(ActionState):
+    action_url: str = "https://actions.globus.org/hello_world"
+    echo_string: str = "$.input.echo_string"
+    sleep_time: t.Union[str, int] = 1
 
 
 if __name__ == "__main__":
     # Instantiate the client
-    hello_client = HelloClient()
+    hello_client = GladierBaseClient(start_at=HelloState())
 
     # Run the flow
     flow_input = {"input": {"echo_string": "Hello World!"}}
