@@ -86,9 +86,9 @@ if __name__ == "__main__":
                 'index': 'my-globus-search-index',
                 'visible_to': ['public'],
                 
-                # Ingest and Transfer are disabled by default for dry-run testing.
-                # 'ingest_enabled': True,
-                # 'transfer_enabled': True,
+                # Ingest and Transfer can be disabled for dry-run testing.
+                # 'publish_enabled': False,
+                # 'transfer_enabled': False,
 
                 'enable_meta_dc': True,
                 'enable_meta_files': True,
