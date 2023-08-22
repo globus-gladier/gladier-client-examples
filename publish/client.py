@@ -39,7 +39,7 @@ def gather_metadata(publishv2, **data) -> dict:
 
 @generate_flow_definition
 class GatherMetadata(GladierBaseTool):
-    funcx_functions = [gather_metadata]
+    compute_functions = [gather_metadata]
     
 
 def cleanup_files(publishv2, **data) -> dict:
@@ -53,18 +53,14 @@ def cleanup_files(publishv2, **data) -> dict:
 
 @generate_flow_definition
 class CleanupFiles(GladierBaseTool):
-    funcx_functions = [cleanup_files]
+    compute_functions = [cleanup_files]
 
 
 
 @generate_flow_definition(modifiers={
-    # publishv2_gather_metadata uses funcx_endpoint_non_compute, so our other custom functions
-    # will also use this endpoint.
-    'gather_metadata': {'endpoint': 'funcx_endpoint_non_compute'},
-    'cleanup_files': {'endpoint': 'funcx_endpoint_non_compute'},
     # Make the Publishv2 Tool get its metadata from the result of the custom GatherMetadata
     # function above.
-    'publishv2_gather_metadata': {'payload': '$.GatherMetadata.details.result[0]'},
+    'publishv2_gather_metadata': {'payload': '$.GatherMetadata.details.results[0].output'},
 })
 class PublicationTestClient(GladierBaseClient):
     gladier_tools = [
@@ -105,7 +101,7 @@ if __name__ == "__main__":
                 }
             },
             # FuncX Test endpoint
-            'funcx_endpoint_non_compute': '4b116d3c-1703-4f8f-9f6f-39921e5864df',
+            'compute_endpoint': '4b116d3c-1703-4f8f-9f6f-39921e5864df',
         }
     }
     # Instantiate the client

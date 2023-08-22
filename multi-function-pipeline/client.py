@@ -19,8 +19,8 @@ class GenerateNumbersTool(GladierBaseTool):
     Generate a list of random numbers. Generates 10 by default
     """
 
-    funcx_functions = [generate_numbers]
-    required_input = ["funcx_endpoint_compute"]
+    compute_functions = [generate_numbers]
+    required_input = ["compute_endpoint"]
 
 
 def average_numbers(numbers: List[int], **data) -> int:
@@ -31,8 +31,8 @@ def average_numbers(numbers: List[int], **data) -> int:
 class AverageNumbersTool(GladierBaseTool):
     """Average a list of numbers"""
 
-    funcx_functions = [average_numbers]
-    required_input = ["funcx_endpoint_compute"]
+    compute_functions = [average_numbers]
+    required_input = ["compute_endpoint"]
 
 
 class ReportResultsTool(GladierBaseTool):
@@ -51,8 +51,8 @@ class ReportResultsTool(GladierBaseTool):
                 "Type": "Action",
                 "Parameters": {
                     "echo_string.=": "'Result from averaging: ' + "
-                    "str(GenerateNumbers.details.result[0].numbers) + "
-                    "' is equal to ' + str(AverageNumbers.details.result[0]) ",
+                    "str(GenerateNumbers.details.results[0].output.numbers) + "
+                    "' is equal to ' + str(AverageNumbers.details.results[0].output) ",
                 },
                 "End": True,
             }
@@ -61,7 +61,7 @@ class ReportResultsTool(GladierBaseTool):
 
 
 @generate_flow_definition(
-    modifiers={"average_numbers": {"payload": "$.GenerateNumbers.details.result[0]"}}
+    modifiers={"average_numbers": {"payload": "$.GenerateNumbers.details.results[0].output"}}
 )
 class MultiFunctionClient(GladierBaseClient):
     """
@@ -83,7 +83,7 @@ class MultiFunctionClient(GladierBaseClient):
 if __name__ == "__main__":
     flow_input = {
         "input": {
-            "funcx_endpoint_compute": "4b116d3c-1703-4f8f-9f6f-39921e5864df",
+            "compute_endpoint": "4b116d3c-1703-4f8f-9f6f-39921e5864df",
         }
     }
     # Instantiate the client

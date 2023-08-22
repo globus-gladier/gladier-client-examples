@@ -18,7 +18,7 @@ if __name__ == "__main__":
         "input": {
             "args": "cat /proc/version",
             "capture_output": True,
-            "funcx_endpoint_compute": "4b116d3c-1703-4f8f-9f6f-39921e5864df",
+            "compute_endpoint": "4b116d3c-1703-4f8f-9f6f-39921e5864df",
         }
     }
     # Instantiate the client

@@ -21,11 +21,11 @@ class ComputeSum(GladierBaseTool):
     returns: the computed result
     """
 
-    funcx_functions = [compute_sum]
+    compute_functions = [compute_sum]
     required_input = [
         "a",
         "b",
-        "funcx_endpoint_compute",
+        "compute_endpoint",
     ]
     # By default, a will have a value of '2' if not specified as input
     flow_input = {"a": 2}
@@ -42,8 +42,8 @@ if __name__ == "__main__":
     flow_input = {
         "input": {
             # 'a': 3,
-            # 'b': 2,
-            "funcx_endpoint_compute": "4b116d3c-1703-4f8f-9f6f-39921e5864df",
+            'b': 2,
+            "compute_endpoint": "4b116d3c-1703-4f8f-9f6f-39921e5864df",
         }
     }
     # Instantiate the client
