@@ -1,12 +1,14 @@
-## Shell CMD
+## Schemas
 
-This example shows registering a client with a custom Schema,
-for easily running flows via the Globus Webapp.
+This example demonstrates running a simple flow with a flow schema to aid flow runners
+in starting a flow, by documenting and validating input fields as part of a flow. Flow
+schemas are optional, but recommended for any flows where new users may not be familiar
+with the internals of the flow and/or prefer starting flows from the webapp, which has
+extra support for rendering nice schemas.
 
 ### Requirements
 
 * A Python Environment with Gladier installed
-
 
 ### Setup
 
