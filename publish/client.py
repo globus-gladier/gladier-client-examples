@@ -14,7 +14,7 @@ def gather_metadata(publishv2, **data) -> dict:
     """
     import pathlib
     import random
-
+    import json
     # Create the dataset files used for publication. Also create some interesting
     # unique fields to track within Globus Search.
     dataset = pathlib.PosixPath(publishv2['dataset'])
@@ -27,14 +27,12 @@ def gather_metadata(publishv2, **data) -> dict:
 
     # List the unique 'num_hellos' and 'num_worlds' items within metadata, so it
     # can be catalogued within Globus Search.
-    extra_metadata = {
-        'project_metadata': {
+    metadata = pathlib.PosixPath(publishv2['metadata_file'])
+    metadata.write_text(json.dumps({'project_metadata': {
             'number_of_hellos': num_hellos,
             'number_of_worlds': num_worlds,
         },
-    }
-    publishv2['metadata'].update(extra_metadata)
-    return publishv2
+    }))
 
 
 @generate_flow_definition
@@ -48,6 +46,7 @@ def cleanup_files(publishv2, **data) -> dict:
     dataset = pathlib.PosixPath(publishv2['dataset'])
     (dataset / 'foo.txt').unlink()
     (dataset / 'bar.txt').unlink()
+    (dataset / 'metadata.json').unlink()
     dataset.rmdir()
 
 
@@ -57,11 +56,7 @@ class CleanupFiles(GladierBaseTool):
 
 
 
-@generate_flow_definition(modifiers={
-    # Make the Publishv2 Tool get its metadata from the result of the custom GatherMetadata
-    # function above.
-    'publishv2_gather_metadata': {'payload': '$.GatherMetadata.details.results[0].output'},
-})
+@generate_flow_definition
 class PublicationTestClient(GladierBaseClient):
     gladier_tools = [
         GatherMetadata,
@@ -79,12 +74,15 @@ if __name__ == "__main__":
                 'source_collection': 'my-source-collection-uuid',
                 'source_collection_basepath': '',
                 'destination_collection': 'my-destination-collection-uuid',
+                # This gets replaced by the UUID of the search index being used.
+                # Create a new search index using the following:
+                # globus search index create "my-index" "An index used for cataloging scientific data"
                 'index': 'my-globus-search-index',
                 'visible_to': ['public'],
                 
                 # Ingest and Transfer can be disabled for dry-run testing.
-                # 'publish_enabled': False,
-                # 'transfer_enabled': False,
+                'publish_enabled': False,
+                'transfer_enabled': False,
 
                 'enable_meta_dc': True,
                 'enable_meta_files': True,
@@ -92,6 +90,7 @@ if __name__ == "__main__":
                 # Requires 'datacite' package
                 # 'metadata_dc_validation_schema': 'schema43',
                 # Custom metadata can be added here.
+                'metadata_file': 'my_test_dataset/metadata.json',
                 'metadata': {
                     'dc': {
                         'creators': [{'name': 'Lead Scientist'}],
