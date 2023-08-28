@@ -74,7 +74,7 @@ if __name__ == "__main__":
     flow_input = {
         "input": {
             'publishv2': {
-                'dataset': '/home/funcx/my_test_dataset',
+                'dataset': 'my_test_dataset',
                 'destination': 'my/remote/path',
                 'source_collection': 'my-source-collection-uuid',
                 'source_collection_basepath': '',
