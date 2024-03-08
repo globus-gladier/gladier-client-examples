@@ -10,11 +10,13 @@ a tool multiple times in a flow.
 
 ### Requirements
 
-**WARNING** This example requires a FuncX Endpoint with connected Globus Storage! You will
+**WARNING** This example requires a Compute Endpoint with connected Globus Storage! You will
 not be able to complete this example without both of these things setup! See **[Setup Docs](https://gladier.readthedocs.io/en/latest/gladier/setup.html)**.
 
 * A Python Environment with Gladier installed
-* A FuncX Endpoint with Globus accessible storage
+* A Compute Endpoint with Globus accessible storage
+
+The defaults within the client.py file do not demonstrate an environment where the compute endpoint and collection filesystems are shared. To do so, install [Globus Compute Endpoint](https://funcx.readthedocs.io/en/latest/endpoints.html) and [Globus Connect Personal](https://www.globus.org/globus-connect-personal) or use another environment where you have shell access with Globus accessible files.
 
 
 ### Setup

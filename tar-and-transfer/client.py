@@ -19,20 +19,20 @@ if __name__ == "__main__":
     flow_input = {
         "input": {
             # Transfer input files
-            "from_source_transfer_source_endpoint_id": "ddb59aef-6d04-11e5-ba46-22000b92c6ec",
-            "from_source_transfer_destination_endpoint_id": "9032dd3a-e841-4687-a163-2720da731b5b",
-            "from_source_transfer_source_path": "/share/godata",
-            "from_source_transfer_destination_path": "/nicks/godata",
+            "from_source_transfer_source_endpoint_id": "0121789b-df0e-43fb-b9f0-d0cd1b0ced7d",
+            "from_source_transfer_destination_endpoint_id": "0121789b-df0e-43fb-b9f0-d0cd1b0ced7d",
+            "from_source_transfer_source_path": "/source_files",
+            "from_source_transfer_destination_path": "/staging_files",
             "from_source_transfer_recursive": True,
             # Tar the transferred input files
-            "tar_input": "~/godata",
-            "funcx_endpoint_compute": "553e7b64-0480-473c-beef-be762ba979a9",
+            "tar_input": "test",
+            "compute_endpoint": "4b116d3c-1703-4f8f-9f6f-39921e5864df",
             # Transfer the resulting tarfile
-            "to_destination_transfer_source_endpoint_id": "9032dd3a-e841-4687-a163-2720da731b5b",
-            "to_destination_transfer_destination_endpoint_id": "ddb59aef-6d04-11e5-ba46-22000b92c6ec",
-            "to_destination_transfer_source_path": "/nicks/godata.tgz",
-            "to_destination_transfer_destination_path": "~/godata.tgz",
-            "to_destination_transfer_recursive": False,
+            "to_destination_transfer_source_endpoint_id": "0121789b-df0e-43fb-b9f0-d0cd1b0ced7d",
+            "to_destination_transfer_destination_endpoint_id": "0121789b-df0e-43fb-b9f0-d0cd1b0ced7d",
+            "to_destination_transfer_source_path": "/staging_files",
+            "to_destination_transfer_destination_path": "/destination_files",
+            "to_destination_transfer_recursive": True,
         }
     }
     # Instantiate the client
