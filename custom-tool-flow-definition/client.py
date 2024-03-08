@@ -18,6 +18,7 @@ class HelloTool(GladierBaseTool):
                     "sleep_time.$": "$.input.sleep_time",
                 },
                 "End": True,
+                "ResultPath": "$.Hello"
             }
         },
     }
