@@ -81,8 +81,8 @@ if __name__ == "__main__":
                 'visible_to': ['public'],
                 
                 # Ingest and Transfer can be disabled for dry-run testing.
-                'publish_enabled': False,
-                'transfer_enabled': False,
+                'enable_publish': False,
+                'enable_transfer': False,
 
                 'enable_meta_dc': True,
                 'enable_meta_files': True,
