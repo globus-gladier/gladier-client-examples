@@ -9,6 +9,10 @@ def make_scatter_plot(
     import pathlib
     import plotly.express as px
 
+    from tqdm import tqdm
+    for i in tqdm(range(10000)):
+        ...
+
     # Make the plot
     fig = px.scatter(x=x, y=y)
     fig.write_image(name)
@@ -50,8 +54,7 @@ if __name__ == "__main__":
     pprint(csc.flow_definition)
     flow_input = {
         "input": {
-            # The tutorial endpoint won't work unfortunately, you will need your own Compute Endpoint
-            # That supports containers.
+            "compute_endpoint": "c66b4066-4a39-46ab-be95-216517d9234f",
             # "compute_endpoint": "4b116d3c-1703-4f8f-9f6f-39921e5864df"
         }
     }
