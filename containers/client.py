@@ -4,7 +4,7 @@ from pprint import pprint
 
 
 def make_scatter_plot(
-    x: t.List[int], y: t.List[int], name: str = "scatter_plot.png", **data
+    x: t.List[int], y: t.List[int], name: str = "/tmp/scatter_plot.png", **data
 ):
     import pathlib
     import plotly.express as px
@@ -23,6 +23,7 @@ def make_scatter_plot(
             "user_endpoint_config": {
                 "container_type": "podman",
                 "container_uri": "ghcr.io/globus-gladier/gladier-client-examples/containers-example:latest",
+                "container_cmd_options": "-v /tmp:/tmp",
             }
         }
     },
